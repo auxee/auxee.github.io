@@ -65,6 +65,7 @@ const normalizePlugin = (plugin) => {
   const version = plugin.AssemblyVersion ?? "Unknown";
   const applicableVersion = plugin.ApplicableVersion ?? "Unknown";
   const repoUrl = plugin.RepoUrl ?? "#";
+  const iconUrl = plugin.IconUrl ?? "";
   const downloadUrl = plugin.DownloadLinkInstall ?? plugin.DownloadLinkUpdate ?? "#";
   const updatedText = toUpdatedText(plugin.LastUpdate);
 
@@ -80,6 +81,7 @@ const normalizePlugin = (plugin) => {
     version,
     applicableVersion,
     repoUrl,
+    iconUrl,
     downloadUrl,
     updatedText,
     searchText: [
@@ -216,10 +218,15 @@ const renderGrid = () => {
     row.dataset.searchText = plugin.searchText;
 
     const pluginCell = createCell(
-      `<div class="col pluginCellContent">
-        <strong>${escapeHtml(plugin.name)}</strong>
-        <span class="caption2">${escapeHtml(plugin.punchline)}</span>
-        <span class="mono">${escapeHtml(plugin.internalName)}</span>
+      `<div class="row pluginCellLayout">
+        ${plugin.iconUrl
+          ? `<img class="pluginIcon" src="${escapeHtml(plugin.iconUrl)}" alt="${escapeHtml(plugin.name)} icon" loading="lazy">`
+          : `<div class="pluginIconFallback" aria-hidden="true">${escapeHtml((plugin.name?.charAt(0) ?? "?").toUpperCase())}</div>`}
+        <div class="col pluginCellContent">
+          <strong>${escapeHtml(plugin.name)}</strong>
+          <span class="caption2">${escapeHtml(plugin.punchline)}</span>
+          <span class="mono">${escapeHtml(plugin.internalName)}</span>
+        </div>
       </div>`,
       { html: true }
     );
