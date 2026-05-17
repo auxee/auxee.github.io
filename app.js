@@ -4,7 +4,7 @@ const REPO_JSON_URL = "https://raw.githubusercontent.com/auxee/AuxDalamudRepo/ma
 
 const LISTING_INFO = {
   name: "Aux Plugins",
-  description: "Simple, useful Dalamud plugins by Auxie.",
+  description: "",
   authorName: "Auxie",
   authorUrl: "https://github.com/auxee",
   bannerImageUrl: ""
@@ -216,7 +216,7 @@ const renderGrid = () => {
     row.dataset.searchText = plugin.searchText;
 
     const pluginCell = createCell(
-      `<div class="col">
+      `<div class="col pluginCellContent">
         <strong>${escapeHtml(plugin.name)}</strong>
         <span class="caption2">${escapeHtml(plugin.punchline)}</span>
         <span class="mono">${escapeHtml(plugin.internalName)}</span>
@@ -226,7 +226,7 @@ const renderGrid = () => {
 
     const tagsCell = createCell(
       plugin.tags.length
-        ? plugin.tags.map((tag) => `<span class="badge">${escapeHtml(tag)}</span>`).join("")
+        ? `<div class="tagCellContent">${plugin.tags.map((tag) => `<span class="badge">${escapeHtml(tag)}</span>`).join("")}</div>`
         : '<span class="caption2">No tags</span>',
       { html: true }
     );

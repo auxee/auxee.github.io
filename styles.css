@@ -83,6 +83,38 @@ h1 {
   border-radius: 6px;
 }
 
+#pluginGrid fluent-data-grid-row {
+  display: grid;
+  grid-template-columns: minmax(0, 58%) minmax(0, 22%) minmax(0, 20%);
+  align-items: start;
+}
+
+#pluginGrid fluent-data-grid-cell {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.8rem 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+#pluginGrid fluent-data-grid-row[row-type="header"] fluent-data-grid-cell {
+  font-weight: 600;
+}
+
+.pluginCellContent {
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.15rem;
+}
+
+.tagCellContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 .searchBlock {
   margin-top: 1rem;
   width: 100%;
