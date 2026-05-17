@@ -139,6 +139,14 @@ const createCell = (content, options = {}) => {
   return cell;
 };
 
+const createIconFallback = (pluginName) => {
+  const fallback = document.createElement("div");
+  fallback.className = "pluginIconFallback";
+  fallback.setAttribute("aria-hidden", "true");
+  fallback.textContent = (pluginName?.charAt(0) ?? "?").toUpperCase();
+  return fallback;
+};
+
 const hideRowMenu = () => {
   const menu = document.getElementById("rowMoreMenu");
   menu.classList.add("hidden");
@@ -198,13 +206,6 @@ const renderGrid = () => {
   const grid = document.getElementById("pluginGrid");
   grid.innerHTML = "";
 
-  const headerRow = document.createElement("fluent-data-grid-row");
-  headerRow.setAttribute("row-type", "header");
-  headerRow.appendChild(createCell("Plugin", { cellType: "columnheader" }));
-  headerRow.appendChild(createCell("Tags", { cellType: "columnheader" }));
-  headerRow.appendChild(createCell("Actions", { cellType: "columnheader" }));
-  grid.appendChild(headerRow);
-
   if (state.filteredPlugins.length === 0) {
     showStatus(state.plugins.length === 0 ? "No plugins published yet." : "No plugins match your search.");
     return;
@@ -213,36 +214,66 @@ const renderGrid = () => {
   showStatus(`Showing ${state.filteredPlugins.length} plugin${state.filteredPlugins.length === 1 ? "" : "s"}.`);
 
   state.filteredPlugins.forEach((plugin) => {
-    const row = document.createElement("fluent-data-grid-row");
-    row.setAttribute("row-type", "default");
+    const row = document.createElement("article");
+    row.className = "pluginRow";
     row.dataset.searchText = plugin.searchText;
 
-    const pluginCell = createCell(
-      `<div class="row pluginCellLayout">
-        <div class="pluginIconWrap">
-          ${plugin.iconUrl
-            ? `<img class="pluginIcon" src="${escapeHtml(plugin.iconUrl)}" alt="${escapeHtml(plugin.name)} icon" loading="lazy">`
-            : `<div class="pluginIconFallback" aria-hidden="true">${escapeHtml((plugin.name?.charAt(0) ?? "?").toUpperCase())}</div>`}
-        </div>
-        <div class="col pluginCellContent">
-          <strong>${escapeHtml(plugin.name)}</strong>
-          <span class="caption2">${escapeHtml(plugin.punchline)}</span>
-          <span class="mono">${escapeHtml(plugin.internalName)}</span>
-        </div>
-      </div>`,
-      { html: true }
-    );
+    const rowBody = document.createElement("div");
+    rowBody.className = "pluginRowBody";
 
-    const tagsCell = createCell(
-      plugin.tags.length
-        ? `<div class="tagCellContent">${plugin.tags.map((tag) => `<span class="badge">${escapeHtml(tag)}</span>`).join("")}</div>`
-        : '<span class="caption2">No tags</span>',
-      { html: true }
-    );
+    const iconSlot = document.createElement("div");
+    iconSlot.className = "pluginIconSlot";
+    if (plugin.iconUrl) {
+      const icon = document.createElement("img");
+      icon.className = "pluginIcon";
+      icon.src = plugin.iconUrl;
+      icon.alt = `${plugin.name} icon`;
+      icon.loading = "lazy";
+      icon.referrerPolicy = "no-referrer";
+      icon.onerror = () => {
+        iconSlot.innerHTML = "";
+        iconSlot.appendChild(createIconFallback(plugin.name));
+      };
+      iconSlot.appendChild(icon);
+    } else {
+      iconSlot.appendChild(createIconFallback(plugin.name));
+    }
 
-    const actionsCell = createCell("", { html: true });
+    const content = document.createElement("div");
+    content.className = "col pluginCellContent";
+
+    const pluginName = document.createElement("strong");
+    pluginName.textContent = plugin.name;
+    const punchline = document.createElement("span");
+    punchline.className = "caption2";
+    punchline.textContent = plugin.punchline;
+    const internalName = document.createElement("span");
+    internalName.className = "mono";
+    internalName.textContent = plugin.internalName;
+
+    content.appendChild(pluginName);
+    content.appendChild(punchline);
+    content.appendChild(internalName);
+
+    const tagWrap = document.createElement("div");
+    tagWrap.className = "tagCellContent mt-2";
+    if (plugin.tags.length === 0) {
+      const noTags = document.createElement("span");
+      noTags.className = "caption2";
+      noTags.textContent = "No tags";
+      tagWrap.appendChild(noTags);
+    } else {
+      plugin.tags.forEach((tag) => {
+        const badge = document.createElement("span");
+        badge.className = "badge";
+        badge.textContent = tag;
+        tagWrap.appendChild(badge);
+      });
+    }
+    content.appendChild(tagWrap);
+
     const actionWrap = document.createElement("div");
-    actionWrap.className = "row align-items-center";
+    actionWrap.className = "row align-items-center mt-2";
 
     const detailsButton = document.createElement("fluent-button");
     detailsButton.appearance = "accent";
@@ -256,11 +287,11 @@ const renderGrid = () => {
 
     actionWrap.appendChild(detailsButton);
     actionWrap.appendChild(moreButton);
-    actionsCell.appendChild(actionWrap);
+    content.appendChild(actionWrap);
 
-    row.appendChild(pluginCell);
-    row.appendChild(tagsCell);
-    row.appendChild(actionsCell);
+    rowBody.appendChild(iconSlot);
+    rowBody.appendChild(content);
+    row.appendChild(rowBody);
     grid.appendChild(row);
   });
 };

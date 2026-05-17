@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aux FFXIV Plugins</title>
+  <title>AuxPlugins</title>
   <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,7 +11,7 @@
   <div class="col align-items-center content">
     <header id="listingInfo" class="col mb-4 w-100 align-items-center">
       <div class="bannerImage hidden" id="bannerImage"></div>
-      <h1 id="listingTitle">Aux Plugins</h1>
+      <h1 id="listingTitle">AuxPlugins</h1>
       <p class="caption1 mb-2" id="listingDescription">Dalamud plugins by Auxie.</p>
       <p class="caption1 mb-2">
         Published by
@@ -40,7 +40,7 @@
 
     <section class="packages">
       <div id="gridStatus" class="caption1 mb-2">Loading plugins...</div>
-      <fluent-data-grid id="pluginGrid" class="w-100" generate-header="sticky"></fluent-data-grid>
+      <div id="pluginGrid" class="pluginGrid w-100"></div>
     </section>
   </div>
 
