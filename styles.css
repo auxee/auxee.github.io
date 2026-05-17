@@ -85,8 +85,9 @@ h1 {
 
 #pluginGrid fluent-data-grid-row {
   display: grid;
-  grid-template-columns: minmax(0, 58%) minmax(0, 22%) minmax(0, 20%);
+  grid-template-columns: minmax(0, 1fr) 220px 170px;
   align-items: start;
+  width: 100%;
 }
 
 #pluginGrid fluent-data-grid-cell {
@@ -96,6 +97,10 @@ h1 {
   text-align: left;
   padding: 0.8rem 0.5rem;
   overflow-wrap: anywhere;
+}
+
+#pluginGrid fluent-data-grid-cell:first-child {
+  padding-left: 0;
 }
 
 #pluginGrid fluent-data-grid-row[row-type="header"] fluent-data-grid-cell {
@@ -114,24 +119,31 @@ h1 {
   align-items: flex-start;
 }
 
+.pluginIconWrap {
+  width: 56px;
+  min-width: 56px;
+  align-self: stretch;
+  min-height: 76px;
+}
+
 .pluginIcon {
-  width: 36px;
-  height: 36px;
+  width: 100%;
+  height: 100%;
   border-radius: 7px;
   object-fit: cover;
-  flex: 0 0 36px;
+  min-height: 76px;
   border: 1px solid var(--neutral-stroke-rest);
 }
 
 .pluginIconFallback {
-  width: 36px;
-  height: 36px;
+  width: 100%;
+  height: 100%;
   border-radius: 7px;
-  flex: 0 0 36px;
+  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 700;
   background-color: var(--neutral-fill-hover);
   color: var(--neutral-foreground-rest);

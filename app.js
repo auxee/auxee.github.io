@@ -219,9 +219,11 @@ const renderGrid = () => {
 
     const pluginCell = createCell(
       `<div class="row pluginCellLayout">
-        ${plugin.iconUrl
-          ? `<img class="pluginIcon" src="${escapeHtml(plugin.iconUrl)}" alt="${escapeHtml(plugin.name)} icon" loading="lazy">`
-          : `<div class="pluginIconFallback" aria-hidden="true">${escapeHtml((plugin.name?.charAt(0) ?? "?").toUpperCase())}</div>`}
+        <div class="pluginIconWrap">
+          ${plugin.iconUrl
+            ? `<img class="pluginIcon" src="${escapeHtml(plugin.iconUrl)}" alt="${escapeHtml(plugin.name)} icon" loading="lazy">`
+            : `<div class="pluginIconFallback" aria-hidden="true">${escapeHtml((plugin.name?.charAt(0) ?? "?").toUpperCase())}</div>`}
+        </div>
         <div class="col pluginCellContent">
           <strong>${escapeHtml(plugin.name)}</strong>
           <span class="caption2">${escapeHtml(plugin.punchline)}</span>
