@@ -1,0 +1,180 @@
+:root {
+  color-scheme: light dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 1rem;
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--neutral-foreground-rest);
+}
+
+a {
+  color: var(--accent-foreground-rest);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.content {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+.caption1 {
+  font-size: 1rem;
+  color: var(--neutral-foreground-hover);
+}
+
+.caption2 {
+  font-size: 0.85rem;
+  color: var(--neutral-foreground-rest);
+}
+
+.packages {
+  margin: 0.5rem 0 1rem 0;
+  max-width: 100%;
+  width: 100%;
+  padding: 0.25rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#pluginGrid {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.searchBlock {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.searchBlock .root {
+  width: 100%;
+}
+
+#searchInput {
+  width: 100%;
+}
+
+.repoUrlField {
+  min-width: 320px;
+  max-width: 100%;
+  flex-grow: 1;
+}
+
+.repoBlock {
+  width: 100%;
+}
+
+#addRepoHelpDialog {
+  z-index: 12;
+}
+
+#pluginDialog {
+  z-index: 11;
+}
+
+#rowMoreMenu {
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 13;
+  background: var(--neutral-layer-2);
+  border: 1px solid var(--neutral-stroke-rest);
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+#rowMoreMenu a {
+  display: block;
+  text-decoration: none;
+  color: var(--neutral-foreground-rest);
+  padding: 0.6rem 0.8rem;
+}
+
+#rowMoreMenu a:hover {
+  background: var(--neutral-fill-hover);
+}
+
+.bannerImage {
+  aspect-ratio: 5 / 1;
+  border-radius: 6px;
+  max-width: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  background-color: var(--neutral-fill-hover);
+  margin-right: 0.35rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+}
+
+.mono {
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 0.85rem;
+}
+
+.m-0 { margin: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.ms-2 { margin-left: 0.5rem; }
+.me-2 { margin-right: 0.5rem; }
+.ps-4 { padding-left: 1rem; }
+.ps-5 { padding-left: 1.4rem; }
+.pe-4 { padding-right: 1rem; }
+.pb-4 { padding-bottom: 1rem; }
+.w-100 { width: 100%; }

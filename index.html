@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aux FFXIV Plugins</title>
+  <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="col align-items-center content">
+    <header id="listingInfo" class="col mb-4 w-100 align-items-center">
+      <div class="bannerImage hidden" id="bannerImage"></div>
+      <h1 id="listingTitle">Aux Plugins</h1>
+      <p class="caption1 mb-2" id="listingDescription">Dalamud plugins by Auxie.</p>
+      <p class="caption1 mb-2">
+        Published by
+        <a id="publisherLink" href="https://github.com/auxee" target="_blank" rel="noreferrer">Auxie</a>
+      </p>
+    </header>
+
+    <section class="repoBlock mt-2 row align-items-center">
+      <fluent-text-field
+        id="repoUrlField"
+        class="repoUrlField"
+        readonly
+        value="https://raw.githubusercontent.com/auxee/AuxDalamudRepo/main/repo.json">
+      </fluent-text-field>
+      <fluent-button appearance="accent" class="ms-2" id="repoUrlCopyButton">
+        Copy Repo URL
+      </fluent-button>
+      <fluent-button id="repoHelpButton" appearance="stealth" class="ms-2" title="How to add this repository in Dalamud">
+        ?
+      </fluent-button>
+    </section>
+
+    <section class="searchBlock">
+      <fluent-text-field id="searchInput" appearance="outline" placeholder="Search by name, id, description, or tags"></fluent-text-field>
+    </section>
+
+    <section class="packages">
+      <div id="gridStatus" class="caption1 mb-2">Loading plugins...</div>
+      <fluent-data-grid id="pluginGrid" class="w-100" generate-header="sticky"></fluent-data-grid>
+    </section>
+  </div>
+
+  <fluent-dialog id="addRepoHelpDialog" hidden modal>
+    <div class="col ps-4 pe-4 pb-4">
+      <div class="row align-items-center justify-content-between mt-3 mb-2">
+        <h3 class="m-0">How to add this repo in Dalamud</h3>
+        <fluent-button appearance="stealth" id="addRepoHelpClose" title="Close">
+          X
+        </fluent-button>
+      </div>
+      <p class="mb-2">In-game setup steps:</p>
+      <ol class="ps-5 mb-3">
+        <li class="mb-2">Type <code>/xlsettings</code> in FFXIV chat.</li>
+        <li class="mb-2">Open the <strong>Experimental</strong> tab, then <strong>Custom Plugin Repositories</strong>.</li>
+        <li class="mb-2">Paste this URL, click <strong>+</strong>, enable it, then click <strong>Save and Close</strong>.</li>
+        <li class="mb-2">Open installer with <code>/xlplugins</code>.</li>
+      </ol>
+      <h5 class="m-0 mb-2">Repository URL</h5>
+      <div class="row align-items-center">
+        <fluent-text-field
+          id="helpRepoUrlField"
+          class="repoUrlField"
+          readonly
+          value="https://raw.githubusercontent.com/auxee/AuxDalamudRepo/main/repo.json">
+        </fluent-text-field>
+        <fluent-button class="ms-2" id="helpRepoUrlCopyButton">Copy</fluent-button>
+      </div>
+    </div>
+  </fluent-dialog>
+
+  <fluent-dialog id="pluginDialog" hidden modal>
+    <div class="col ps-4 pe-4 pb-4">
+      <div class="row align-items-center justify-content-between mt-3 mb-2">
+        <div>
+          <h3 id="pluginDialogName" class="m-0">Plugin Name</h3>
+          <p id="pluginDialogVersion" class="caption2 m-0">v0.0.0.0</p>
+        </div>
+        <fluent-button appearance="stealth" id="pluginDialogClose" title="Close">
+          X
+        </fluent-button>
+      </div>
+
+      <p id="pluginDialogPunchline" class="caption1 mb-2"></p>
+      <p id="pluginDialogDescription" class="mb-3"></p>
+
+      <div class="pluginMeta">
+        <p class="mb-1"><strong>Internal Name:</strong> <span id="pluginDialogInternalName"></span></p>
+        <p class="mb-1"><strong>Author:</strong> <span id="pluginDialogAuthor"></span></p>
+        <p class="mb-1"><strong>Dalamud API:</strong> <span id="pluginDialogApiLevel"></span></p>
+        <p class="mb-1"><strong>Applicable Version:</strong> <span id="pluginDialogApplicableVersion"></span></p>
+        <p class="mb-1"><strong>Updated:</strong> <span id="pluginDialogUpdated"></span></p>
+      </div>
+
+      <div class="mt-3">
+        <h5 class="m-0 mb-2">Tags</h5>
+        <div id="pluginDialogTags" class="row wrap"></div>
+      </div>
+
+      <div class="row align-items-center mt-4">
+        <a id="pluginDialogRepoLink" target="_blank" rel="noreferrer">View on GitHub</a>
+        <span class="ms-2 me-2">|</span>
+        <a id="pluginDialogDownloadLink" target="_blank" rel="noreferrer">Download Release</a>
+      </div>
+    </div>
+  </fluent-dialog>
+
+  <div id="rowMoreMenu" class="hidden">
+    <a id="rowMoreRepoLink" target="_blank" rel="noreferrer">View on GitHub</a>
+    <a id="rowMoreDownloadLink" target="_blank" rel="noreferrer">Download release</a>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
