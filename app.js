@@ -7,7 +7,7 @@ const LISTING_INFO = {
   description: "",
   authorName: "Auxie",
   authorUrl: "https://github.com/auxee",
-  bannerImageUrl: ""
+  bannerImageUrl: "banner.png"
 };
 
 const state = {
